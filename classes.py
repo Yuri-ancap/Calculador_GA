@@ -1,63 +1,73 @@
-'''Ponto:
-Atributos: Coordenadas x e y.
-Métodos: Distância entre dois pontos, calcular ponto médio.
-
-Reta:
-Atributos: Coeficientes a, b e c na equação geral ax+by+c=0.
-Métodos: Calcular interseção com outra reta, calcular distância de um ponto à reta.
-
-Círculo:
-Atributos: Centro (um ponto) e raio.
-Métodos: Calcular área, verificar se um ponto está dentro do círculo.
-
-Funcionalidades:
-
-Operações Básicas com Pontos:
-Permita a criação de pontos e realize operações como calcular a distância entre dois pontos e encontrar o ponto médio.
-
-Operações Básicas com Retas:
-Permita a criação de retas e realize operações como calcular a interseção entre duas retas e a distância de um ponto a uma reta.
-
-Operações Básicas com Círculos:
-Permita a criação de círculos e realize operações como calcular a área do círculo e verificar se um ponto está dentro do círculo.
-
-Interatividade com o Usuário:
-Desenvolva uma interface de usuário simples para permitir que o usuário crie pontos, retas e círculos, e realize operações com eles.
-
-
-Desenvolvimento Adicional:
-
-Visualização Gráfica (Opcional):
-Utilize bibliotecas gráficas para criar visualizações gráficas dos pontos, retas e círculos no plano cartesiano.
-
-Persistência de Dados (Opcional):
-Implemente a capacidade de salvar e carregar pontos, retas e círculos a partir de arquivos para persistência de dados.
-
-Aplicações Específicas (Opcional):
-Adicione funcionalidades específicas, como verificar se duas retas são paralelas, calcular a interseção de uma reta com um círculo, entre outros.'''
-
+import math
 class Cartesiano:
-    def __init__(self, x, y):
-        self.x = x
-        self.y= y
+    
+    def __init__(self, x=0, y=0):
+        self._x = x
+        self._y= y
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def y(self):
+        return self._y
+
 
 class Pontos(Cartesiano):
-    def distancia_pontos():
-        pass
-    def ponto_medio():
-        pass
+    def distancia_pontos(ponto2, ponto1):
+        resposta = ((ponto1.x - ponto2.x)**2 + (ponto1.y - ponto2.y)**2)**(1/2)
+        return f'distancia = {resposta}'
+        
+    def ponto_medio(ponto2, ponto1):
+        valory = (ponto2.x - ponto1.x)/2
+        valorx = (ponto2.y - ponto1.y)/2
+
+        return f'x={valorx} e y={valory} são os pontos médios'
 
 class Reta:
-    def __init__(self, a, b, c):
-        self.a = a
-        self.b = b 
-        self.c = c
-    
-    def calcular_intercecao()
+    def __init__(self, a=0, b=0):
+        self._a = a
+        self._b = b 
 
-class Circulo(Cartesiano, raio):
-    def __init__(self, x, y, raio):
-        super().__init__(x,y)
-        self.raio = raio
+    @property
+    def a(self):
+        return self._a
     
+    @property
+    def b(self):
+        return self._b
+    
+
+    def calcular_intercecao(valor2, valor1):
+        if valor2.a == valor1.a:
+            return f'não se interceptam'   
+        else:
+            x = (valor1.b - valor2.b)/(valor2.a - valor1.a )
+            y = valor1.a*x + valor1.b
+            return f'x={x} y={y} são os pontos de intersecção' 
         
+    def calcular_distancia(valor2, valor1):
+        if valor2.a != valor1.a:
+            return f'distancia não existe'
+        else:
+            return abs((valor2.b - valor1.b)/((1 + valor1.a**(2)))**(1/2))
+
+class Circulo(Cartesiano):
+    def __init__(self, x, y, raio):
+       super().__init__(x,y)
+       self._raio = raio
+    
+    @property
+    def raio(self):
+        return self._raio
+    
+    def calcular_area(raio):
+        return math.pi* raio * raio 
+        
+    def ponto_dentro(centro, coordenadas, raio):
+        if centro.y + raio >= coordenadas.y and centro.x + raio >= coordenadas.x:
+            return f'{coordenadas.x} e {coordenadas.y} estão dentro do círculo!'
+        else:
+            return f'{coordenadas.x} e {coordenadas.y} Não pertencem ao círculo!'
+ 
